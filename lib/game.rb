@@ -10,11 +10,19 @@ class Game
 
     def initialize
         @io = IO.new(["onward", "backward", "inspect", "talk"])
-        name = get_answer("What is your name, Player?").downcase
+        name = get_name()
         @player = Player.new(name)
         @dungeon = Dungeon.new(name)
         @text = ""
         @command = ""
+    end
+
+    def get_name()
+        name = ""
+        while name.size < 4
+            name = get_answer("What is your name, Player? (at least 4 characters").downcase
+        end
+        name
     end
     
     def get_command()

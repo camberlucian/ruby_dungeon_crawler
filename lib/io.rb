@@ -21,12 +21,17 @@ class IO
         user_input
     end
 
-    def input_answer(query = "Please enter an answer.")
+    def input_answer(query = "Please enter an answer. (Alphanumeric only)")
         user_input = ""
-        while user_input = ""
+        while user_input = "" || !validate(user_input)
             puts query
             user_unput = gets.chomp
         end
         user_input
+    end
+
+    def validate str
+        chars = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
+        str.chars.detect {|ch| !chars.include?(ch)}.nil?
     end
 end

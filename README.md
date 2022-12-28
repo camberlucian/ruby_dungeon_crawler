@@ -9,6 +9,7 @@ Roadmap
 - Entity behavior - TODO
 - NPC generation and interaction - TODO
 - NPC behavior - TODO
+- Timing system and render refactor - TODO
 - API (and DB?)- TODO
 - Multiple Connections (possibly in Elixir?) - TODO
 - UI (LiveView if previous step done in Elixir) - TODO

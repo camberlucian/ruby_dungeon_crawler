@@ -1,4 +1,5 @@
 class Player
+    attr_accessor :location
     attr_accessor :sanity
     attr_accessor :martial
     attr_accessor :intel 
@@ -10,8 +11,10 @@ class Player
     attr_accessor :allegiance
     attr_accessor :empathy
     attr_accessor :name 
+    
 
     def initialize(name)
+        @location = 0
         @name = name
         @allegiance = ["overworld"]
         @sanity = 10
