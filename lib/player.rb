@@ -25,5 +25,6 @@ class Player
         @str = 10
         @cha = 10
         @con = 10
+        @empathy = 5
     end
 end

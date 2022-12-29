@@ -13,14 +13,25 @@ class Dungeon
     attr_accessor :current_upstart
     attr_accessor :function
     attr_accessor :material
+    attr_accessor :room_types
+
 
 
     def initialize(name)
         @rooms = []
         @entities = []
-        @creator_type, @age, @climate, @current_occupier, @current_invader, @current_upstart, @material = build_dungeon(name)
-        @rooms[0] = Room.new(@creator_type, @function, true)
+        @creator_type, @age, @climate, @current_occupier, @current_invader, @current_upstart, @function, @material, @room_types = build_dungeon(name)
+        @rooms[0] = Room.new(@room_types.sample, true)
 
+    end
+
+    def add_room()
+        @rooms << Room.new(@room_types.sample, false)
+    end
+
+    def get_room_text(location)
+        room = @rooms[location]
+        room.examine()
     end
 
     def build_dungeon(name)
@@ -35,8 +46,9 @@ class Dungeon
         current_upstart = tables["factions"][chars[5]]
         function = tables["functions"][chars[6]]
         material = get_material(climate)
+        room_types = get_room_types(creator_type, function)
 
-        return creator_type, age, climate, current_occupier, current_invader, current_upstart, material
+        return creator_type, age, climate, current_occupier, current_invader, current_upstart, function, material, room_types
     end 
 
     def get_age(char)

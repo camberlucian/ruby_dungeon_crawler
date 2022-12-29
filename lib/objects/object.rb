@@ -1,12 +1,12 @@
-class Object
+class DObject
     attr_accessor :commands
 
     def initialize
-        @commands = ["inspect"]
+        @commands = ["QUIT", "EXAMINE"]
         @description = "This seems like an object"
     end
 
-    def inspect
+    def examine
         @description
     end
 end

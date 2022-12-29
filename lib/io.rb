@@ -1,31 +1,28 @@
-class IO
-    @commands = ["quit", "help"]
-
-    def initialize(commands)
-        @commands.concat(commands)
+class DIO 
+    def initialize
     end
-    
-    def input_command(query = "Please enter a command.")
+
+    def input_command(commands, query = "Please enter a command.")
         puts query
         valid = false
         user_input = ""
         while !valid do
-            user_unput = gets.chomp.split(" ")
-            if @commands.include?(user_input[0])
+            user_input = gets.chomp.split(" ")
+            if commands.include?(user_input[0].upcase)
                 valid = true
             else
                 puts "Please start your command with a word from the list below. Separate words with spaces:"
-                puts @commands.inspect
+                puts commands.inspect
             end
         end
-        user_input
+        user_input.map { |string| string.upcase }
     end
 
     def input_answer(query = "Please enter an answer. (Alphanumeric only)")
         user_input = ""
-        while user_input = "" || !validate(user_input)
-            puts query
-            user_unput = gets.chomp
+        while user_input == "" || !validate(user_input)
+            puts(query)
+            user_input = gets.chomp
         end
         user_input
     end

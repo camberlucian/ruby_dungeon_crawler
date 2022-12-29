@@ -1,5 +1,8 @@
-class Container < Object
+require_relative "./object"
+
+class Container < DObject
     def initialize()
+        super
         @inventory = []
         @description = "It seems like a container of some sort"
     end

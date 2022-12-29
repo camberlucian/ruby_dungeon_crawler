@@ -3,7 +3,7 @@ Professional Development project to reinforce object oriented programming within
 
 Roadmap
 - Dungeon Generation - In Progress
-- Player Progression - TODO
+- Player Progression - In Progress
 - Doors and switches - TODO
 - Entity generation and interaction - TODO
 - Entity behavior - TODO
