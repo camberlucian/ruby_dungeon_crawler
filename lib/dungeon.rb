@@ -14,6 +14,7 @@ class Dungeon
     attr_accessor :function
     attr_accessor :material
     attr_accessor :room_types
+    attr_accessor :events
 
 
 
@@ -21,17 +22,22 @@ class Dungeon
         @rooms = []
         @entities = []
         @creator_type, @age, @climate, @current_occupier, @current_invader, @current_upstart, @function, @material, @room_types = build_dungeon(name)
-        @rooms[0] = Room.new(@room_types.sample, true)
-
+        room = Room.new(@room_types.sample, true)
+        @events = room.populate(@current_occupier, @current_invader, @current_upstart, @function, @events)
+        @rooms[0] = room
+        @events = []
     end
 
     def add_room()
-        @rooms << Room.new(@room_types.sample, false)
+        room = Room.new(@room_types.sample, false)
+        room.populate(@current_occupier, @current_invader, @current_upstart, @function, @events)
+        @rooms << room
     end
 
     def get_room_text(location)
         room = @rooms[location]
-        room.examine()
+        text = room.examine()
+        text + "\nThe walls are of #{@material["color"].upcase} #{@material["adjective"].upcase} #{@material["name"].upcase}."
     end
 
     def build_dungeon(name)
