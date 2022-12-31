@@ -1,4 +1,5 @@
 
+require_relative "./helpers"
 require_relative "./tables/dungeon_tables"
 require_relative "./objects/room"
 
@@ -30,14 +31,30 @@ class Dungeon
 
     def add_room()
         room = Room.new(@room_types.sample, false)
-        room.populate(@current_occupier, @current_invader, @current_upstart, @function, @events)
+        @events = room.populate(@current_occupier, @current_invader, @current_upstart, @function, @events)
         @rooms << room
     end
 
     def get_room_text(location)
         room = @rooms[location]
         text = room.examine()
-        text + "\nThe walls are of #{@material["color"].upcase} #{@material["adjective"].upcase} #{@material["name"].upcase}."
+        text += "\nThe walls are of #{@material["color"].upcase} #{@material["adjective"].upcase} #{@material["name"].upcase}."
+        contents = room.inventory()
+        if contents.size > 0
+            text += "\nIn the room you see "
+            if contents.size > 1
+                for a in 0..contents.size-2 do
+                    name = contents[a].name.upcase
+                    text += add_article(name) + ", "
+                end
+                name = contents.last.name.upcase
+                text += "and " + add_article(name) + "."
+            else
+                name = contents.last.name.upcase
+                text += add_article(name) + "."
+            end
+        end
+        text
     end
 
     def build_dungeon(name)

@@ -17,27 +17,30 @@ class Room < Container
     end
 
     def populate(occupier, invader, upstart, function, events = [])
-        types = ["faction", "function", "furniture", "clutter", "mundane", "clutter", "mundane", "container", "hidden_item", "event"]
-        factions = [occupier, invader, updstart]
+        types = ["faction", "function", "furniture", "clutter", "mundane", "clutter", "mundane", "container", "event", "hidden_item"]
+        factions = [occupier, invader, upstart]
         objects = 0
         while objects < 6
-            type = types.sample
-            object = DObject.new
-            if type == "event" && events.size > 0
-                object = get_event_object()
-            elsif type == "event"
-                types.pop
+            if rand(1..3) >1
                 type = types.sample
-                object = get_object(type)
-            elsif type == "faction"
-                object = get_faction_object(factions.sample)
-            elsif type == "function"
-                object = get_object(function)
-            else
-                object = get_object(type)
+                object = DObject.new
+                if type == "event"
+                    object = get_event_object(factions)
+                elsif type == "faction"
+                    object = get_faction_object(factions.sample)
+                elsif type == "function"
+                    object = get_object(function)
+                elsif type == "hidden_item"
+                    type = (types - ["hidden_item", "container", "faction", "event"]).sample
+                    object = get_hidden_item(type)
+                else
+                    object = get_object(type)
+                end
+                @inventory << object 
             end
-            @inventory < object 
+            objects += 1   
         end
+        events
     end
 
     def get_commands()

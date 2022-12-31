@@ -13,7 +13,7 @@ class Game
         name = get_name()
         @player = Player.new(name)
         @dungeon = Dungeon.new(name)
-        @text = "You have entered a #{@dungeon.creator_type.upcase} #{@dungeon.function.upcase}."
+        @text = "\nYou have entered a #{@dungeon.creator_type.upcase} #{@dungeon.function.upcase}."
         @command = ""
     end
 

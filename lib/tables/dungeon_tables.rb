@@ -80,15 +80,39 @@ OBJECTS = {
     "catacomb" => [{"name" => "sarcophagus", "type" => "container"}, {"name" => "looted sarcophagus", "type" => "container"}, {"name" => "burial alcove", "type" => "mundane"}, {"name" => "mausoleum", "type" => "clutter"}, {"name" => "shelf of urns", "type" => "container"}, {"name" => "embalming table", "type" => "furniture"}, {"name" => "large insence burner", "type" => "mundane"}, {"name" => "patch of nitre", "type" => "clutter"}, {"name" => "stone idol", "type" => "mundane"}, {"name" => "empty offering plate", "type" => "mundane"}, ],
     "fort" => [{"name" => "broken weapon rack", "type" => "clutter"}, {"name" => "empty weapon rack", "type" => "mundane"}, {"name" => "weapon rack", "type" => "container"}, {"name" => "map table", "type" => "furniture"}, {"name" => "foot locker", "type" => "container"}, {"name" => "anvil", "type" => "clutter"}, {"name" => "grindstone", "type" => "clutter"}, {"name" => "training dummy", "type" => "mundane"}, {"name" => "broken balista", "type" => "clutter"}, {"name" => "wooden barricade", "type" => "clutter"}, {"name" => "stack of sand bags", "type" => "clutter"} ],
     "monastary" => [{"name" => "kneeling bench", "type" => "furniture"}, {"name" => "lecturn", "type" => "clutter"}, {"name" => "meditation cushion", "type" => "furniture"}, {"name" => "reliquary box", "type" => "container"}, {"name" => "offering box", "type" => "container"}, {"name" => "large insence burner", "type" => "clutter"}, {"name" => "altar", "type" => "clutter"}, {"name" => "shrine", "type" => "clutter"}, {"name" => "wooden pew", "type" => "furniture"}, {"stone" => "stone idol", "type" => "mundane"}, {"name" => "faded fresco", "type" => "mundane"}, {"name" => "crate of insence", "type" => "clutter"}, {"name" => "brewing cask", "type" => "clutter"}],
-    "outpost" => [{"name" => "looted storage crate", "type" => "clutter"}, {"name" => "ruined kiosk", "type" => "clutter"}, {"name" => "abandoned kiosk", "type" => "container"}, {"name" => "empty cart", "type" => "clutter"}, {"name" => "cart", "type" => "container"}, {"name" => "display board", "type" => "clutter"}, {"name" => "small stage", "type" => "mundane"}, {"name" => "brewing cask", "type" => "clutter"}, {"name" => "improvised stall", "type" => "clutter"}]
+    "outpost" => [{"name" => "looted storage crate", "type" => "clutter"}, {"name" => "ruined kiosk", "type" => "clutter"}, {"name" => "abandoned kiosk", "type" => "container"}, {"name" => "empty cart", "type" => "clutter"}, {"name" => "cart", "type" => "container"}, {"name" => "display board", "type" => "clutter"}, {"name" => "small stage", "type" => "mundane"}, {"name" => "brewing cask", "type" => "clutter"}, {"name" => "improvised stall", "type" => "clutter"}],
     "lair" => [{"name" => "gibbet", "type" => "clutter"}, {"name" => "huge bell", "type" => "clutter"}, {"name" => "rack of chains", "type" => "mundane"}, {"name" => "torture rack", "type" => "clutter"}, {"name" => "pile of corpses", "type" => "clutter"}, {"name" => "strapped chair", "type" => "furniture"}, {"name" => "pile of rusted fetters", "type" => "mundane"}, {"name" => "iron maiden", "type" => "clutter"}, {"name" => "stocks", "type" => "clitter"}, {"name" => "torture wheel", "type" => "clutter"}, {"name" => "defiled shrine", "type" => "mundane"}, {"name" => "inscribed circle", "type" => "mundane"}],
     "mine" => [{"name" => "mine cart", "type" => "container"}, {"name" => "cart full of ore", "type" => "clutter"}, {"name" => "cart full of rubble", "type" => "clutter"},{"name" => "box of blunted tools", "type" => "mundane"}, {"name" => "stack of support beams", "type" => "clutter"}, {"name" => "collapsed tunnel", "type" => "mundane"}, {"name" => "collapsed tunnel", "type" => "mundane"}, {"name" => "ore grinder", "type" => "clutter"} , {"name" => "rack of chains", "type" => "mundane"}],
-    "undead" => [{"name" => "empty sarcophagus", "type" => "mundane"}, {"name" => "decayed corpse", "type" => "mundane"}, {"name" => "empty grave", "type" => "clutter"}, {"name" => "sacrificial altar", "type" => "clutter"}, {"name" => "lecturn", "type" => "clutter"}, {"name" => "", "type" => "alembic"}, , {"name" => "tank of embalming fluid", "type" => "clutter"}, {"name" => "opened coffin", "type" => "container"}, {"name" => "sinkhole", "type" => "mundane"}],
-    "goblin" => [{"name" => "pile of food scraps", "type" => "mundane"}, {"name" => "pile of burnt furniture", "type" => "mundane"}, {"name" => "grafitti mural", "type" => "mundane"}, {"name" => "scratched out fresco", "type" => "mundane"}, , {"name" => "bone cage", "type" => "container"}, {"name" => "pile of dead rats", "type" => "mundane"}, , {"name" => "skull totem", "type" => "mundane"}, {"name" => "smoking fire pit", "type" => "mundane"}],
+    "undead" => [{"name" => "empty sarcophagus", "type" => "mundane"}, {"name" => "decayed corpse", "type" => "mundane"}, {"name" => "empty grave", "type" => "clutter"}, {"name" => "sacrificial altar", "type" => "clutter"}, {"name" => "lecturn", "type" => "clutter"}, {"name" => "", "type" => "alembic"}, {"name" => "tank of embalming fluid", "type" => "clutter"}, {"name" => "opened coffin", "type" => "container"}, {"name" => "sinkhole", "type" => "mundane"}],
+    "goblin" => [{"name" => "pile of food scraps", "type" => "mundane"}, {"name" => "pile of burnt furniture", "type" => "mundane"}, {"name" => "grafitti mural", "type" => "mundane"}, {"name" => "scratched out fresco", "type" => "mundane"}, {"name" => "bone cage", "type" => "container"}, {"name" => "pile of dead rats", "type" => "mundane"}, {"name" => "skull totem", "type" => "mundane"}, {"name" => "smoking fire pit", "type" => "mundane"}],
     "beast" => [{"name" => "pile of excrement", "type" => "mundane"}, {"name" => "pile of excrement", "type" => "container"}, {"partially eaten corpse" => "", "type" => "mundane"}],
     "bandit" => [{"name" => "campsite", "type" => "container"}, {"name" => "grindstone", "type" => "clutter"}, {"name" => "map table", "type" => "furniture"}, {"name" => "loot chest", "type" => "container"}, {"name" => "loot chest", "type" => "container"}, {"name" => "stocks", "type" => "clutter"},{"name" => "empty weapon rack", "type" => "mundane"}, {"name" => "weapon rack", "type" => "container"}]
 }
 
+def get_hidden_item(type)
+    choice = OBJECTS[type].sample
+    desc = "It is #{add_article(choice["name"])}. It may be searched."
+    Container.new(choice["name"], desc, choice["type"])
+end
+
+def get_event_object(factions)
+    types = ["faction"]
+    case types.sample
+    when "faction"
+        get_faction_object(factions.sample)
+    end
+end
+
+def get_faction_object(faction)
+    choice = OBJECTS[faction].sample
+    if choice["type"] == "container"
+        desc = "It is #{add_article(choice["name"])}. It may be searched."
+        Container.new(choice["name"], desc, choice["type"], faction)
+    else
+        desc = "It is #{add_article(choice["name"])}."
+        DObject.new(choice["name"], desc, choice["type"], faction)
+    end
+end
 
 def get_object(type)
     choice = OBJECTS[type].sample
@@ -122,7 +146,7 @@ def load_dungeon_build_table()
     table = Hash.new
     table["creators"] = fill_table(CREATORS, chars)
     table["climates"] = fill_table(CLIMATES, chars)
-    table["factions"] = fill_table(CREATORS, chars)
+    table["factions"] = fill_table(FACTIONS, chars)
     table["functions"] = fill_table(FUNCTIONS, chars)
     table
 end

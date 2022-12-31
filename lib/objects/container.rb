@@ -1,7 +1,7 @@
 require_relative "./object"
 
 class Container < DObject
-    def initialize(name = "container", desc = "It seems like a container of some sort", type = "container")
+    def initialize(name = "container", desc = "It seems like a container of some sort", type = "container", faction = "none")
         super
         @inventory = []
         @commands << "SEARCH"
