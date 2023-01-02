@@ -35,24 +35,23 @@ class Dungeon
         @rooms << room
     end
 
+    def get_interactables(location)
+        contents = @rooms[location].inventory()
+        interactables = Hash.new
+        contents.each do |object|
+            interactables[object.name] = object
+        end
+        interactables
+    end
+
     def get_room_text(location)
         room = @rooms[location]
         text = room.examine()
         text += "\nThe walls are of #{@material["color"].upcase} #{@material["adjective"].upcase} #{@material["name"].upcase}."
         contents = room.inventory()
         if contents.size > 0
-            text += "\nIn the room you see "
-            if contents.size > 1
-                for a in 0..contents.size-2 do
-                    name = contents[a].name.upcase
-                    text += add_article(name) + ", "
-                end
-                name = contents.last.name.upcase
-                text += "and " + add_article(name) + "."
-            else
-                name = contents.last.name.upcase
-                text += add_article(name) + "."
-            end
+            text += "\nIn the room you see: "
+            text += concat_list(contents)
         end
         text
     end

@@ -83,16 +83,17 @@ OBJECTS = {
     "outpost" => [{"name" => "looted storage crate", "type" => "clutter"}, {"name" => "ruined kiosk", "type" => "clutter"}, {"name" => "abandoned kiosk", "type" => "container"}, {"name" => "empty cart", "type" => "clutter"}, {"name" => "cart", "type" => "container"}, {"name" => "display board", "type" => "clutter"}, {"name" => "small stage", "type" => "mundane"}, {"name" => "brewing cask", "type" => "clutter"}, {"name" => "improvised stall", "type" => "clutter"}],
     "lair" => [{"name" => "gibbet", "type" => "clutter"}, {"name" => "huge bell", "type" => "clutter"}, {"name" => "rack of chains", "type" => "mundane"}, {"name" => "torture rack", "type" => "clutter"}, {"name" => "pile of corpses", "type" => "clutter"}, {"name" => "strapped chair", "type" => "furniture"}, {"name" => "pile of rusted fetters", "type" => "mundane"}, {"name" => "iron maiden", "type" => "clutter"}, {"name" => "stocks", "type" => "clitter"}, {"name" => "torture wheel", "type" => "clutter"}, {"name" => "defiled shrine", "type" => "mundane"}, {"name" => "inscribed circle", "type" => "mundane"}],
     "mine" => [{"name" => "mine cart", "type" => "container"}, {"name" => "cart full of ore", "type" => "clutter"}, {"name" => "cart full of rubble", "type" => "clutter"},{"name" => "box of blunted tools", "type" => "mundane"}, {"name" => "stack of support beams", "type" => "clutter"}, {"name" => "collapsed tunnel", "type" => "mundane"}, {"name" => "collapsed tunnel", "type" => "mundane"}, {"name" => "ore grinder", "type" => "clutter"} , {"name" => "rack of chains", "type" => "mundane"}],
-    "undead" => [{"name" => "empty sarcophagus", "type" => "mundane"}, {"name" => "decayed corpse", "type" => "mundane"}, {"name" => "empty grave", "type" => "clutter"}, {"name" => "sacrificial altar", "type" => "clutter"}, {"name" => "lecturn", "type" => "clutter"}, {"name" => "", "type" => "alembic"}, {"name" => "tank of embalming fluid", "type" => "clutter"}, {"name" => "opened coffin", "type" => "container"}, {"name" => "sinkhole", "type" => "mundane"}],
+    "undead" => [{"name" => "empty sarcophagus", "type" => "mundane"}, {"name" => "decayed corpse", "type" => "mundane"}, {"name" => "empty grave", "type" => "clutter"}, {"name" => "sacrificial altar", "type" => "clutter"}, {"name" => "lecturn", "type" => "clutter"}, {"name" => "alembic", "type" => "mundane"}, {"name" => "tank of embalming fluid", "type" => "clutter"}, {"name" => "opened coffin", "type" => "container"}, {"name" => "sinkhole", "type" => "mundane"}],
     "goblin" => [{"name" => "pile of food scraps", "type" => "mundane"}, {"name" => "pile of burnt furniture", "type" => "mundane"}, {"name" => "grafitti mural", "type" => "mundane"}, {"name" => "scratched out fresco", "type" => "mundane"}, {"name" => "bone cage", "type" => "container"}, {"name" => "pile of dead rats", "type" => "mundane"}, {"name" => "skull totem", "type" => "mundane"}, {"name" => "smoking fire pit", "type" => "mundane"}],
-    "beast" => [{"name" => "pile of excrement", "type" => "mundane"}, {"name" => "pile of excrement", "type" => "container"}, {"partially eaten corpse" => "", "type" => "mundane"}],
+    "beast" => [{"name" => "pile of excrement", "type" => "mundane"}, {"name" => "pile of excrement", "type" => "container"}, {"name" => "partially eaten corpse", "type" => "mundane"}],
     "bandit" => [{"name" => "campsite", "type" => "container"}, {"name" => "grindstone", "type" => "clutter"}, {"name" => "map table", "type" => "furniture"}, {"name" => "loot chest", "type" => "container"}, {"name" => "loot chest", "type" => "container"}, {"name" => "stocks", "type" => "clutter"},{"name" => "empty weapon rack", "type" => "mundane"}, {"name" => "weapon rack", "type" => "container"}]
 }
 
 def get_hidden_item(type)
     choice = OBJECTS[type].sample
-    desc = "It is #{add_article(choice["name"])}. It may be searched."
-    Container.new(choice["name"], desc, choice["type"])
+    object = Container.new(choice["name"], "", choice["type"])
+    object.fill(1)
+    object
 end
 
 def get_event_object(factions)
@@ -106,10 +107,11 @@ end
 def get_faction_object(faction)
     choice = OBJECTS[faction].sample
     if choice["type"] == "container"
-        desc = "It is #{add_article(choice["name"])}. It may be searched."
-        Container.new(choice["name"], desc, choice["type"], faction)
+        object = Container.new(choice["name"], "\n Seems indicate presence of #{add_article(faction)}.", choice["type"], faction)
+        object.fill(rand(6))
+        object
     else
-        desc = "It is #{add_article(choice["name"])}."
+        desc = "It is #{add_article(choice["name"].upcase)}."
         DObject.new(choice["name"], desc, choice["type"], faction)
     end
 end
@@ -117,11 +119,11 @@ end
 def get_object(type)
     choice = OBJECTS[type].sample
     if type == "container"
-        desc = "It is #{add_article(choice["name"])}. It may be searched."
-        Container.new(choice["name"], desc)
+        object = Container.new(choice["name"])
+        object.fill(rand(6))
+        object
     else
-        desc = "It is #{add_article(choice["name"])}."
-        DObject.new(choice["name"], desc, type)
+        DObject.new(choice["name"], "", type)
     end
 end
 
