@@ -36,7 +36,7 @@ class Room < Container
                 else
                     object = get_object(type)
                 end
-                @inventory << object 
+                @inventory[object.name] = object 
             end
             objects += 1   
         end

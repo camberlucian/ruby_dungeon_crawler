@@ -8,6 +8,7 @@ class Game
     attr_accessor :dungeon
     attr_accessor :text
     attr_accessor :command
+    attr_accessor :commands
 
     def initialize
         @io = DIO.new()
@@ -18,6 +19,7 @@ class Game
         @command = ""
         @interactables = Hash.new
         @takables = Hash.new
+        @commands = []
     end
 
     def render()
@@ -29,11 +31,18 @@ class Game
             room_text = @dungeon.get_room_text(@player.location)
             text = text + "\n" + room_text
         end
-        commands = @dungeon.rooms[@player.location].get_commands()
+        @commands = @dungeon.rooms[@player.location].get_commands() + is_take?() + @player.commands
         text = text + "\n" + "Commands: #{commands}"
         @text = text
     end
 
+    def is_take?()
+        if @takables.size > 0
+            ["TAKE"]
+        else
+            []
+        end
+    end
 
     def process_command(location)
         if @command == ""
@@ -53,6 +62,17 @@ class Game
         return "\nYou move ONWARD to the next room.", true, ""
     end
 
+    def inv()
+        if @player.inventory.size < 1
+            return "Your inventory is empty", true, ""
+        else
+            text = "Your inventory contains: "
+            inv = @player.list_inventory()
+            text += concat_list(inv)
+            return text, true, ""
+        end
+    end
+
     def backward()
         @takables = Hash.new
         @interactables = Hash.new
@@ -70,7 +90,6 @@ class Game
     end
 
     def examine_object(command)
-        puts @interactables.inspect
         name = command.join(" ").downcase
         if @interactables.key?(name)
             @interactables[name].examine()
@@ -90,14 +109,14 @@ class Game
             else
                 text = "You can see no #{target.upcase} in this room."
             end
-            return text, true, ""
+            return text, false, ""
         end
     end
 
     def search_room(location)
         room = @dungeon.rooms[location]
         text = @dungeon.get_room_text(location)
-        containers = room.inventory().select {|object| object.object_type == "container"}
+        containers = room.list_inventory().select {|object| object.object_type == "container"}
         if containers.size > 0
             text += "\nYou may SEARCH the following items: #{concat_list(containers)}"
         end
@@ -108,17 +127,40 @@ class Game
         object = @interactables[target]
         if object.object_type == "container"
             text = "In this #{target.upcase} you "
-            if object.inventory().size < 1
+            if object.list_inventory().size < 1
                 text += "do not find anything..."
             else
-                object.inventory().each do |item|
+                object.list_inventory().each do |item|
                     @takables[item.name] = item
                 end
-                text += "find: #{concat_list(object.inventory())}"
+                text += "find: #{concat_list(object.list_inventory())}"
             end
         else
             "This #{target.upcase} can not be searched."
         end
+    end
+
+    def take()
+        if command.size < 2
+            return "Take what?", false, ""
+        else
+            target = @command[1..].join(" ").downcase
+            text = ""
+            if @takables.key?(target)
+                text = take_item(target)
+            else
+                text = "You can see no #{target.upcase} in this room."
+            end
+            return text, false, ""
+        end
+    end
+
+    def take_item(target)
+        item = @takables[target]
+        container = @interactables[item.location]
+        container.remove(item.name)
+        @player.take(item)
+        "You take the #{item.name.upcase} from the #{item.location.upcase}."
     end
 
     def get_name()
@@ -130,11 +172,10 @@ class Game
     end
     
     def get_command()
-        commands = @dungeon.rooms[@player.location].get_commands()
         if @request == ""
-            @command = @io.input_command(commands)
+            @command = @io.input_command(@commands)
         else
-            @command = @io.input_command(commands, @request)
+            @command = @io.input_command(@commands, @request)
         end
         if @command[0] == "QUIT"
             false

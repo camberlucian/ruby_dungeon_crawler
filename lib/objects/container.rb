@@ -4,7 +4,7 @@ require_relative "../tables/item_tables"
 class Container < DObject
     def initialize(name = "container", desc = "It seems like a container of some sort", type = "container", faction = "none")
         super
-        @inventory = []
+        @inventory = Hash.new()
         @commands << "SEARCH"
         @description += " It may be searched."
         @object_type = type
@@ -14,17 +14,23 @@ class Container < DObject
         @inventory
     end
 
-    def insert(item)
-        @inventory << item
+    def list_inventory()
+        list = []
+        @inventory.each do |key, value|
+            list << value
+        end
+        list
     end
 
-    def remove(item)
-        index = @inventory.index(item)
-        @inventory.delete_at(index)
-        item
+    def insert(item)
+        @inventory[item.name] = item
+    end
+
+    def remove(item_name)
+        @inventory.delete(item_name)
     end
 
     def fill(amt=6)
-        @inventory = @inventory + get_container_inventory(amt)
+        @inventory = get_container_inventory(amt, @name)
     end
 end

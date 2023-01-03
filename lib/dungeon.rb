@@ -36,7 +36,7 @@ class Dungeon
     end
 
     def get_interactables(location)
-        contents = @rooms[location].inventory()
+        contents = @rooms[location].list_inventory()
         interactables = Hash.new
         contents.each do |object|
             interactables[object.name] = object
@@ -48,7 +48,7 @@ class Dungeon
         room = @rooms[location]
         text = room.examine()
         text += "\nThe walls are of #{@material["color"].upcase} #{@material["adjective"].upcase} #{@material["name"].upcase}."
-        contents = room.inventory()
+        contents = room.list_inventory()
         if contents.size > 0
             text += "\nIn the room you see: "
             text += concat_list(contents)

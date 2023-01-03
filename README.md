@@ -16,3 +16,6 @@ Roadmap
 - Session and lobby management - TODO
 - Deployment - TODO
 
+Running:
+- bundle install
+- rake run
